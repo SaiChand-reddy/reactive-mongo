@@ -1,0 +1,34 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.9.BUILD-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+def managedVersions = dependencyManagement.managedVersions
+project.ext.set("lombokVersion", managedVersions['org.projectlombok:lombok'])
+
+dependencies {
+	implementation "org.projectlombok:lombok"
+	annotationProcessor "org.projectlombok:lombok"
+	testAnnotationProcessor "org.projectlombok:lombok"
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'io.projectreactor:reactor-test'
+}
+
+test {
+	useJUnitPlatform()
+}

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: reactive-mongo-sample
+  profiles:
+    active: local
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/customerDB
+
+server:
+  port: 8081
+
+com:
+  example:
+    reactivemongo:
+      data:
+        max-size: 50
+        min-size: 5
+        connect-timeout-ms: 5000 #milliseconds
+        read-timeout-ms: 10000 #milliseconds
+        max-wait-time-ms: 1000 #milliseconds
+        jmx-metrics-enabled: true
